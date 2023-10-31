@@ -1,0 +1,49 @@
+fun nordisk-flagg(color1, color2, color3, lengde, hoide16, hoide7, lengde13, hoide6, lengde12):
+  
+  
+  bakgrunn = rectangle(lengde, hoide16, "solid", color3)
+  Top-left-1 = square(hoide7, "solid", color2)
+  Bottom-left-1 = square(hoide7, "solid", color2)
+  Top-right-1 = rectangle(lengde13, hoide7, "solid", color2)
+  Bottom-right-1 = rectangle(lengde13, hoide7, "solid", color2)
+  Top-left-2= square(hoide6, "solid", color1)
+  Bottom-left-2 = square(hoide6, "solid", color1)
+  Bottom-right-2 = rectangle(lengde12, hoide6, "solid", color1)
+  Top-right-2 = rectangle(lengde12, hoide6, "solid", color1)
+  
+  
+  
+overlay-align("right", "bottom", Bottom-right-2,
+      overlay-align("right", "top", Top-right-2,
+      overlay-align("left", "bottom", Bottom-left-2,
+      overlay-align("left", "top", Top-left-2,
+            overlay-align("right", "bottom", Bottom-right-1,
+              overlay-align("right", "top", Top-right-1,
+                overlay-align("left", "bottom", Bottom-left-1,
+                  overlay-align("left", "top", Top-left-1,
+                  bakgrunn))))))))
+  
+end
+
+
+
+#norge
+nordisk-flagg("fire-brick", "white", "midnight-blue", 220, 160, 70, 130, 60, 120)
+
+#Danmark
+nordisk-flagg("red", "red", "white", 370, 280, 120, 210, 0, 0)
+
+#Finland
+nordisk-flagg("white", "midnight-blue", "midnight-blue", 180, 110, 40, 120, 45, 115)
+
+#Island
+nordisk-flagg("blue", "white", "crimson", 220, 160, 70, 130, 60, 120)
+
+#Sverige
+nordisk-flagg("steel-blue", "gold", "gold", 160, 100, 45, 90, 40, 95)
+
+#Færøyene
+nordisk-flagg("white", "royal-blue", "crimson", 220, 160, 70, 130, 60, 120)
+
+#Åland
+nordisk-flagg("royal-blue", "gold", "red", 260, 170, 75, 160, 65, 145 )
