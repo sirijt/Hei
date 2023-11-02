@@ -1,0 +1,63 @@
+include gdrive-sheets
+include data-source
+include shared-gdrive("dcic-2021", "1wyQZj_L0qqV9Ekgr9au6RX2iqt2Ga8Ep")
+
+
+ssid = "1RYN0i4Zx_UETVuYacgaGfnFcv4l9zd9toQTTdkQkj7g"
+kWh-wealthy-consumer-data =
+load-table: komponent, energi
+source: load-spreadsheet(ssid).sheet-by-name("kWh", true)
+    sanitize energi using string-sanitizer
+end
+kWh-wealthy-consumer-data 
+
+#Koden ovenfor ble brukt for å lage en tabell (oppgave a)
+
+
+
+fun energi-to-number(str :: String) -> Number:
+# skriv koden her (tips: bruk cases og string-to-number funksjonen)
+  cases(Option) string-to-number(str):
+    | some(a) => a
+    | none => 20
+  end
+where:
+  energi-to-number("0") is 0
+energi-to-number("48") is 48
+end
+
+
+#Denne funksjonen gorde slik at alle tallene ble godkjent (valid),   (oppgave b)
+
+
+
+energi-er-goy= transform-column(kWh-wealthy-consumer-data, "energi", energi-to-number)
+energi-er-goy
+
+#Ved bruk av denne funksjonen, fikk jeg endret tallene fra string til number (oppgave c). "energi-er-goy er navnet på tabellen
+
+
+
+distance-travelled-per-day = 30
+distance-per-unit-of-fuel = 15
+energy-per-unit-of-fuel = 10
+
+
+
+energy-per-day = ( distance-travelled-per-day / 
+                            distance-per-unit-of-fuel ) * 
+                                        energy-per-unit-of-fuel
+
+
+energy-per-day
+
+#linje 36-38. Her definerte jeg linjene som hører til i funksjonen. For å få summen på energiforbuket, brukte jeg funksjonen nedenfor: (oppgave d). For at alt skulle bli riktig, måtte jeg fylle inn summen på linje 23, slik at det ble endret fra "none" til "20".
+
+
+energiforbruk = sum(energi-er-goy, "energi")
+energiforbruk
+
+
+bar-chart(energi-er-goy, "komponent", "energi")
+
+#Til slutt, for å lage en tabell, brukte jeg funksjonen ovenfor. 
